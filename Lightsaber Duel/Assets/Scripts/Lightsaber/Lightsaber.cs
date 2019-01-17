@@ -14,11 +14,16 @@ public class Lightsaber : Weapon {
         public Light bladeLight;
         public bool isEnabled;
         public Lightsaber_Color_ScriptableObject bladeColor;
-        public CapsuleCollider bladeCollider;
+        public Collider bladeCollider;
+
         internal float currentLength;
+        internal RaycastHit hit;
     }
 
     public Blade[] blades;
+    public LayerMask lightsaberMask;
+
+    private bool isColliding;
 
     public void ToggleBlade(bool toggle, int bladeIndex)
     {
@@ -33,9 +38,37 @@ public class Lightsaber : Weapon {
         StartCoroutine(ExtendBlade(toggle, bladeIndex));
     }
 
-    public void OnHit(Collision gotHit)
+    public void OnHit(Transform gotHit)
     {
+        if (gotHit.gameObject.layer == 9)
+        {
+            if (!isColliding)
+            {
+                EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Clash"), "Lightsaber Clash Player");
+                EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Clashlock"), "Lightsaber Clashlock Player");
+                isColliding = true;
+            }
+        }
         print("Hit");
+    }
+
+    public void OnHitExit()
+    {
+        if (isColliding)
+        {
+            EffectsManager.instance.StopAudio("Lightsaber Clashlock Player");
+            isColliding = false;
+        }
+    }
+
+    public RaycastHit CheckBladeHit(Transform raycastOrigin, float raycastRange, LayerMask mask)
+    {
+        RaycastHit toReturn;
+
+        Debug.DrawRay(raycastOrigin.position, raycastOrigin.up * raycastRange, Color.black);
+        Physics.Raycast(raycastOrigin.position, raycastOrigin.up, out toReturn, raycastRange, mask);
+
+        return toReturn;
     }
 
     private IEnumerator ExtendBlade(bool toggle, int bladeIndex)

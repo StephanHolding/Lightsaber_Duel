@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Lightsaber Clashlock
   m_EditorClassIdentifier: 
   audioName: Lightsaber Clashlock
-  clip: {fileID: 8300000, guid: e0183bc0c4103fa45ad846154c9df5dc, type: 3}
+  clip: {fileID: 8300000, guid: b5c79211b157e564081bdbea44296d85, type: 3}
   defaultVolume: 1
