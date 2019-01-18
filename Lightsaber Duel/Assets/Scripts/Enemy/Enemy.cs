@@ -47,9 +47,8 @@ public class Enemy : LightsaberWielder {
         {
             print("Rebound");
 
-            //GameManager.instance.ChangeTimeScale(0);
+            GameManager.instance.ChangeTimeScale(GameManager.instance.standardTimeScale);
             StartCoroutine(AttackRebound());
-            //anim.SetTrigger("Rebound");
         }
     }
 
@@ -88,7 +87,6 @@ public class Enemy : LightsaberWielder {
         attacking = false;
 
         float toWait = Random.Range(waitTime.x, waitTime.y);
-        print(toWait);
         yield return new WaitForSeconds(toWait);
 
 
@@ -97,10 +95,9 @@ public class Enemy : LightsaberWielder {
 
     private IEnumerator AttackRebound()
     {
-        GameManager.instance.ChangeTimeScale(GameManager.instance.standardTimeScale);
         anim.SetFloat("Rewind", -1);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         anim.SetFloat("Rewind", 1);
 

@@ -75393,14 +75393,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 1.3
+  - time: 1.8
     functionName: TriggerSlowMotion
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 1.8666667
+  - time: 2
     functionName: TriggerSlowMotion
     data: 
     objectReferenceParameter: {fileID: 0}

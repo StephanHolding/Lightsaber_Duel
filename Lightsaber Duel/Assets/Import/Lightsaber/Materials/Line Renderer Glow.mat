@@ -80,6 +80,6 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1.2943463, g: 2.7857363, b: 1.2105557, a: 1}
+    - _EmissionColor: {r: 1.9395791, g: 1.1587354, b: 0.5580864, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
