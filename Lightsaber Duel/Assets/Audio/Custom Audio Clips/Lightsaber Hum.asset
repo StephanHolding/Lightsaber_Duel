@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioName: Lightsaber Hum
   clip: {fileID: 8300000, guid: 038079546bfbf4049806e478db2d4275, type: 3}
-  defaultVolume: 0.454
+  defaultVolume: 0.1

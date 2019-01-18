@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : LightsaberWielder {
 
     public AnimationClip[] animations;
     public Vector2 waitTime;
@@ -11,11 +11,14 @@ public class Enemy : MonoBehaviour {
     private int maxAnimationIndex;
     private Animator anim;
     private bool playingAnimation;
+    private bool attacking;
     private float timer;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+
+        mySaber.wieldedBy = this;
     }
 
     private void Update()
@@ -36,6 +39,18 @@ public class Enemy : MonoBehaviour {
     private void ToggleSaber(bool toggle)
     {
         mySaber.ToggleBlade(toggle, 0);
+    }
+
+    public override void ReceiveMessage()
+    {
+        if (attacking)
+        {
+            print("Rebound");
+
+            //GameManager.instance.ChangeTimeScale(0);
+            StartCoroutine(AttackRebound());
+            //anim.SetTrigger("Rebound");
+        }
     }
 
     public void TriggerSlowMotion(int toggle)
@@ -62,6 +77,7 @@ public class Enemy : MonoBehaviour {
     private IEnumerator PlayAnimation(int animationIndex)
     {
         playingAnimation = true;
+        attacking = true;
 
         anim.SetInteger("Animation Index", animationIndex);
         anim.SetBool("Attack", true);
@@ -69,11 +85,27 @@ public class Enemy : MonoBehaviour {
         yield return new WaitForSeconds(animations[animationIndex].length);
 
         anim.SetBool("Attack", false);
+        attacking = false;
 
         float toWait = Random.Range(waitTime.x, waitTime.y);
         print(toWait);
         yield return new WaitForSeconds(toWait);
 
+
+        playingAnimation = false;
+    }
+
+    private IEnumerator AttackRebound()
+    {
+        GameManager.instance.ChangeTimeScale(GameManager.instance.standardTimeScale);
+        anim.SetFloat("Rewind", -1);
+
+        yield return new WaitForSeconds(0.5f);
+
+        anim.SetFloat("Rewind", 1);
+
+        StopCoroutine("PlayAnimation");
+        anim.SetTrigger("Rebound");
 
         playingAnimation = false;
     }

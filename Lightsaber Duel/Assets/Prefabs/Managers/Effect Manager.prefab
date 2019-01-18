@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 896c94b8bf28bd44ea4d5ab716173b6e, type: 2}
   - {fileID: 11400000, guid: e449329ed9f87b94394ea12ad4f7037e, type: 2}
   - {fileID: 11400000, guid: ee6713b4f74c168448ade91aa4ab1057, type: 2}
+  - {fileID: 11400000, guid: 7934bd6ed54e9e54fb5545719941d6ae, type: 2}
   activeAudioSources: []
   defaultAudioSourceAmount: 0
   availableParticles: []

@@ -21,6 +21,7 @@ public class Lightsaber : Weapon {
     }
 
     public Blade[] blades;
+    public LightsaberWielder wieldedBy;
     public LayerMask lightsaberMask;
 
     private bool isColliding;
@@ -47,9 +48,10 @@ public class Lightsaber : Weapon {
                 EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Clash"), "Lightsaber Clash Player");
                 EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Clashlock"), "Lightsaber Clashlock Player");
                 isColliding = true;
+
+                wieldedBy.ReceiveMessage();
             }
         }
-        print("Hit");
     }
 
     public void OnHitExit()
@@ -76,7 +78,9 @@ public class Lightsaber : Weapon {
         if (toggle)
         {
             EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Extend"), "Player Lightsaber Extend");
-            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Hum"), "Player Lightsaber Hum");
+            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Hum"), "Player Lightsaber Hum " + bladeIndex, true);
+            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Swing"), "Player Lightsaber Swing " + bladeIndex, true);
+            //EffectsManager.instance.AdjustVolume("Player Lightsaber Swing " + bladeIndex, 0);
 
             while (blades[bladeIndex].currentLength < blades[bladeIndex].bladeLength)
             {
@@ -89,7 +93,8 @@ public class Lightsaber : Weapon {
         else
         {
             EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Retract"), "Player Lightsaber Retract");
-            EffectsManager.instance.StopAudio("Player Lightsaber Hum");
+            EffectsManager.instance.StopAudio("Player Lightsaber Hum " + bladeIndex);
+            EffectsManager.instance.StopAudio("Player Lightsaber Swing " + bladeIndex);
 
             while (blades[bladeIndex].currentLength > 0)
             {

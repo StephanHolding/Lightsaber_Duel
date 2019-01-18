@@ -92,6 +92,17 @@ public class EffectsManager : MonoBehaviour {
         }
     }
 
+    public void AdjustVolume(string audioSourceKey, float volume)
+    {
+        for (int i = 0; i < activeAudioSources.Count; i++)
+        {
+            if (activeAudioSources[i].GetComponent<Key>().key == audioSourceKey)
+            {
+                activeAudioSources[i].volume = volume;
+            }
+        }
+    }
+
     // ======================================== Private Audio Functions ======================================== \\
 
     private AudioSource FindAvailableAudioSource()
