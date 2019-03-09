@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 114669344754491520}
   m_Layer: 9
   m_Name: Blade Collider
-  m_TagString: Untagged
+  m_TagString: Lightsaber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,8 +111,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1398378818132228}
-  m_LocalRotation: {x: 0.04886639, y: -0.022471625, z: 0.0010996265, w: 0.99855196}
-  m_LocalPosition: {x: 0.146, y: 2.448, z: 1.786}
+  m_LocalRotation: {x: 0.5000007, y: 0.49999928, z: -0.4999993, w: 0.5000008}
+  m_LocalPosition: {x: -1.404, y: 0.834, z: 0.421}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4018536444495724}
@@ -120,7 +120,7 @@ Transform:
   - {fileID: 4511698308186690}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: -90.00001}
 --- !u!4 &4718556083043438
 Transform:
   m_ObjectHideFlags: 1
@@ -191,7 +191,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!108 &108826301582291464
 Light:
   m_ObjectHideFlags: 1
@@ -240,18 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4573fa96f968294e9e594d5f0e84221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saberExtendSpeed: 0.075
   blades:
   - bladeLength: 1.1
     blade: {fileID: 120583493520649414}
     bladeLight: {fileID: 108826301582291464}
     isEnabled: 0
-    bladeColor: {fileID: 11400000, guid: e2b1b7b44fe8c6943a6342044ed28416, type: 2}
+    bladeColor: {fileID: 11400000, guid: fd67a89cfa5825349919af92929c800d, type: 2}
     bladeCollider: {fileID: 136890256454250750}
-  wieldedBy: {fileID: 0}
-  lightsaberMask:
-    serializedVersion: 2
-    m_Bits: 512
+  saberExtendSpeed: 0.075
+  damage: 0
 --- !u!114 &114669344754491520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,7 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9501ac5c29ae4d949ae76dca02c3b9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saber: {fileID: 0}
 --- !u!120 &120583493520649414
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -301,7 +297,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 1.1, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.1
@@ -364,7 +360,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1855314813444138}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.025
   m_Height: 1.1
   m_Direction: 1

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Lightsaber : Weapon {
 
-    public float saberExtendSpeed;
-
     [System.Serializable]
-    public class Blade {
-
+    public class Blade
+    {
         public float bladeLength;
         public LineRenderer blade;
         public Light bladeLight;
@@ -16,13 +14,20 @@ public class Lightsaber : Weapon {
         public Lightsaber_Color_ScriptableObject bladeColor;
         public Collider bladeCollider;
 
+        internal int humSound;
+        internal int swingSound;
+
         internal float currentLength;
         internal RaycastHit hit;
     }
 
+    [Header("Blades")]
     public Blade[] blades;
-    public LightsaberWielder wieldedBy;
-    public LayerMask lightsaberMask;
+
+    [Header("Saber Properties")]
+    public float saberExtendSpeed;
+    public float damage;
+    public IDamageable wieldedBy;
 
     private bool isColliding;
 
@@ -41,15 +46,16 @@ public class Lightsaber : Weapon {
 
     public void OnHit(Transform gotHit)
     {
-        if (gotHit.gameObject.layer == 9)
+        if (gotHit != null)
         {
-            if (!isColliding)
+            switch (gotHit.transform.tag)
             {
-                EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Clash"), "Lightsaber Clash Player");
-                EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Clashlock"), "Lightsaber Clashlock Player");
-                isColliding = true;
-
-                wieldedBy.ReceiveMessage();
+                case "Damageable":
+                    gotHit.GetComponent<IDamageable>().TakeDamage(damage);
+                    break;
+                case "Lightsaber":
+                    EffectsManager.instance.PlayAudio("Lightsaber Clash");
+                    break;
             }
         }
     }
@@ -58,29 +64,17 @@ public class Lightsaber : Weapon {
     {
         if (isColliding)
         {
-            EffectsManager.instance.StopAudio("Lightsaber Clashlock Player");
             isColliding = false;
         }
     }
 
-    public RaycastHit CheckBladeHit(Transform raycastOrigin, float raycastRange, LayerMask mask)
-    {
-        RaycastHit toReturn;
-
-        Debug.DrawRay(raycastOrigin.position, raycastOrigin.up * raycastRange, Color.black);
-        Physics.Raycast(raycastOrigin.position, raycastOrigin.up, out toReturn, raycastRange, mask);
-
-        return toReturn;
-    }
-
     private IEnumerator ExtendBlade(bool toggle, int bladeIndex)
     {
-        if (toggle)
+        if (toggle) //when the blade should be extended
         {
-            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Extend"), "Player Lightsaber Extend");
-            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Hum"), "Player Lightsaber Hum " + bladeIndex, true);
-            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Swing"), "Player Lightsaber Swing " + bladeIndex, true);
-            //EffectsManager.instance.AdjustVolume("Player Lightsaber Swing " + bladeIndex, 0);
+            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Extend"));
+            blades[bladeIndex].humSound = EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Hum"), loop: true);
+            blades[bladeIndex].swingSound = EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Swing"), loop: true, volume: 0);
 
             while (blades[bladeIndex].currentLength < blades[bladeIndex].bladeLength)
             {
@@ -90,11 +84,11 @@ public class Lightsaber : Weapon {
                 yield return null;
             }
         }
-        else
+        else        //When the blade should be retracted.
         {
-            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Retract"), "Player Lightsaber Retract");
-            EffectsManager.instance.StopAudio("Player Lightsaber Hum " + bladeIndex);
-            EffectsManager.instance.StopAudio("Player Lightsaber Swing " + bladeIndex);
+            EffectsManager.instance.PlayAudio(EffectsManager.instance.FindAudioClip("Lightsaber Retract"));
+            EffectsManager.instance.StopAudio(blades[bladeIndex].humSound);
+            EffectsManager.instance.StopAudio(blades[bladeIndex].swingSound);
 
             while (blades[bladeIndex].currentLength > 0)
             {
@@ -109,7 +103,5 @@ public class Lightsaber : Weapon {
         blades[bladeIndex].isEnabled = toggle;
         blades[bladeIndex].bladeCollider.enabled = toggle;
     }
-
-
 
 }

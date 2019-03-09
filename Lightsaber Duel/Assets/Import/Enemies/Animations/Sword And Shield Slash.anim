@@ -47879,6 +47879,13 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
+  - time: 0.23333333
+    functionName: TriggerGesture
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.46666667
     functionName: TriggerSlowMotion
     data: 
@@ -47888,6 +47895,20 @@ AnimationClip:
     messageOptions: 0
   - time: 0.56666666
     functionName: TriggerSlowMotion
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.76666665
+    functionName: TriggerGesture
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5
+    functionName: AnimationDone
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -14,7 +14,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Attack
+  - m_Name: New Attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -146,7 +146,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Animation Index
     m_EventTreshold: 4
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: New Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102157996317646074}
@@ -218,7 +218,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Animation Index
     m_EventTreshold: 2
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: New Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102650417641292888}
@@ -308,7 +308,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Animation Index
     m_EventTreshold: 3
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: New Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102594876934265354}
@@ -335,7 +335,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Animation Index
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: New Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102455854673093976}
@@ -386,7 +386,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Animation Index
     m_EventTreshold: 1
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: New Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102996782556879546}

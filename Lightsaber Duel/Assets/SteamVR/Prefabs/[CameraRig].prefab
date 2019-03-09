@@ -926,6 +926,7 @@ MonoBehaviour:
     isEnabled: 0
     bladeColor: {fileID: 11400000, guid: e2b1b7b44fe8c6943a6342044ed28416, type: 2}
     bladeCollider: {fileID: 65886504999270814}
+  wieldedBy: {fileID: 0}
   lightsaberMask:
     serializedVersion: 2
     m_Bits: 512
@@ -972,6 +973,7 @@ MonoBehaviour:
     isEnabled: 0
     bladeColor: {fileID: 11400000, guid: fd67a89cfa5825349919af92929c800d, type: 2}
     bladeCollider: {fileID: 65972388078983394}
+  wieldedBy: {fileID: 0}
   lightsaberMask:
     serializedVersion: 2
     m_Bits: 512

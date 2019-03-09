@@ -32,15 +32,35 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
-        SetStandardTimescale();
+        SetToStandardTimescale();
     }
 
-    public void ChangeTimeScale(float scale)
+    public void ToggleSlowMotion(bool toggle)
+    {
+        if (toggle)
+        {
+            switch (difficulty)
+            {
+                case Difficulty.Easy:
+                    ChangeTimeScale(0.2f);
+                    break;
+                case Difficulty.Medium:
+                    ChangeTimeScale(0.75f);
+                    break;
+            }
+        }
+        else
+        {
+            SetToStandardTimescale();
+        }
+    }
+
+    private void ChangeTimeScale(float scale)
     {
         Time.timeScale = scale;
     }
 
-    private void SetStandardTimescale()
+    private void SetToStandardTimescale()
     {
         if (difficulty == Difficulty.Easy)
         {

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class VR_Player : LightsaberWielder {
+public class VR_Player : MonoBehaviour, IDamageable {
 
+    public float health;
     public Lightsaber rightLightsaber;
     public Lightsaber leftLightsaber;
 
@@ -22,6 +23,19 @@ public class VR_Player : LightsaberWielder {
         {
             leftLightsaber.wieldedBy = this;
             left = true;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+    }
+
+    public void CheckForDeath()
+    {
+        if (health <= 0)
+        {
+            print("Dead");
         }
     }
 

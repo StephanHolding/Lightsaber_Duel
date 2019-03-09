@@ -25,24 +25,7 @@ public class Lightsaber_Singlebladed : Lightsaber {
             if (bladeSpeed > 0)
             {
                 float volume = bladeSpeed / 6;
-                EffectsManager.instance.AdjustVolume("Player Lightsaber Swing " + 0, volume);
-            }
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (blades[0].isEnabled)
-        {
-
-            RaycastHit hit = CheckBladeHit(blades[0].bladeCollider.transform, blades[0].bladeLength, lightsaberMask);
-            if (hit.transform != null)
-            {
-                OnHit(hit.transform);
-            }
-            else
-            {
-                OnHitExit();
+                EffectsManager.instance.AdjustVolume(blades[0].swingSound, volume);
             }
         }
     }
@@ -54,5 +37,11 @@ public class Lightsaber_Singlebladed : Lightsaber {
         previousFramePosition = blades[0].bladeCollider.transform.position;
 
         return toReturn;
+    }
+
+    [ContextMenu("Enable Onebladed Lightsaber")]
+    public void EnableLightsaber()
+    {
+        ToggleBlade(true, 0);
     }
 }
